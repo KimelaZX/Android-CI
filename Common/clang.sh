@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git clone --recursive --depth=1 https://github.com/KanariaAlt/tc-build $(pwd)/llvmTC -b main
+git clone --recursive --depth=1 https://github.com/KimelaZX/tc-build $(pwd)/llvmTC -b main
 cd $(pwd)/llvmTC
 
 bash ci.sh deps
@@ -68,7 +68,7 @@ for bin in $(find install -mindepth 2 -maxdepth 3 -type f -exec file {} \; | gre
 done
 
 # Git config
-wget https://raw.githubusercontent.com/KanariaAlt/Android-CI/main/Common/Git-Config.sh
+wget https://raw.githubusercontent.com/KimelaZX/Android-CI/main/Common/Git-Config.sh
 bash Git-Config.sh
 
 # Release Info
@@ -83,12 +83,12 @@ clang_version="$(install/bin/clang --version | head -n1 | cut -d' ' -f4)"
 
 # Push to GitHub
 # Update Git repository
-git clone "https://KanariaAlt:$GH_TOKEN@github.com/KanariaAlt/Nightcord_Clang" rel_repo
+git clone "https://KimelaZX:$GH_TOKEN@github.com/KimelaZX/Benjit_Clang" rel_repo
 pushd rel_repo || exit
 rm -fr ./*
 cp -r ../install/* .
 git lfs install
-git lfs track "clang-18"
+git lfs track "clang-19"
 git lfs track "opt"
 git lfs track "clang-linker-wrapper"
 git lfs track "clang-repl"
@@ -99,14 +99,14 @@ git lfs track "libLTO.so"
 git lfs track "bugpoint"
 git lfs track "clang-scan-deps"
 git lfs track "lld"
-git lfs track "libclang.so.18.1.8"
-git lfs track "libclang-cpp.so.18.1"
+git lfs track "libclang.so.19.1.6"
+git lfs track "libclang-cpp.so.19.1"
 git checkout README.md # keep this as it's not part of the toolchain itself
 git add .
-git commit -asm "Nightcord: Update to $rel_date build
+git commit -asm "Benjit: Update to $rel_date build
 LLVM commit: $llvm_commit_url
 Clang Version: $clang_version
 Binutils version: $binutils_ver
-Builder commit: https://github.com/KanariaAlt/Nightcord_Clang/commit/$builder_commit"
+Builder commit: https://github.com/KimelaZX/Benjit_clang/commit/$builder_commit"
 git push 
 popd || exit
