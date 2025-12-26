@@ -36,7 +36,7 @@ chmod +x build-llvm.py
     --quiet-cmake \
     --shallow-clone \
     --targets ARM AArch64 X86 \
-    --ref "release/18.x" \
+    --ref "release/19.x" \
     --vendor-string "$LLVM_NAME" 2>&1 | tee build.log
 
 # Check if the final clang binary exists or not.
